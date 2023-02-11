@@ -1,0 +1,13 @@
+{
+  "name": "AskMe",
+  "short_name": "AskMe",
+  "start_url": "index.html",
+  "display": "standalone",
+  "icons": [{
+    "src": "assets/icons/icon-512x512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
+  "background_color": "#000",
+  "theme_color": "#000"
+}
