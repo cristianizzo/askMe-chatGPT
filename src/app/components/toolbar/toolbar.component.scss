@@ -1,0 +1,62 @@
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  color: #000;
+  font-weight: 600;
+}
+
+.logo {
+  margin-left: 18px;
+  padding: 14px 0;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+  line-height: 24px;
+  background-color: #1976d2;
+  font-weight: 600;
+  border: none;
+  position: relative;
+  height: 16px;
+  width: 200px;
+  color: #fff;
+
+  span {
+    margin-left: 45px;
+  }
+
+  svg#rocket {
+    width: 48px;
+    position: absolute;
+    left: -12px;
+    top: -38px;
+  }
+}
+
+
+.toolbar img {
+  margin: 0 16px;
+}
+
+.toolbar #twitter-logo {
+  height: 40px;
+  margin: 0 8px;
+}
+
+.toolbar #youtube-logo {
+  height: 40px;
+  margin: 0 16px;
+}
+
+.toolbar #twitter-logo:hover,
+.toolbar #youtube-logo:hover {
+  opacity: 0.8;
+}
