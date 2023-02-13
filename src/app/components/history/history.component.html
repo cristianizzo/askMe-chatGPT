@@ -1,97 +1,101 @@
 <div class='history'>
   <div class="search-box">
-    <mat-form-field>
+    <div class="input-search">
       <mat-icon matSuffix>search</mat-icon>
-      <input matInput #input maxlength="20" placeholder="Search">
-    </mat-form-field>
+      <input #input matInput maxlength="20" placeholder="Search">
+    </div>
   </div>
 
   <div class="messages-box">
     <ul>
-      <li>
+      <li *ngFor="let key of conversations | keyvalue">
         <div class="message-box">
           <div class="avatar"></div>
-          <div class="paragraph">Something long text should be cut</div>
-          <div class="date">11 Feb 2022</div>
+          <div class="paragraph">{{parseLastMessage(key.value).message}}</div>
+          <div class="date">{{parseLastMessage(key.value).timestamp | appDateFormat}}</div>
         </div>
       </li>
-      <li>
-        <div class="message-box">
-          <div class="avatar"></div>
-          <div class="paragraph">Something long text should be cut</div>
-          <div class="date">11 Feb 2022</div>
-        </div>
-      </li>
-      <li>
-        <div class="message-box">
-          <div class="avatar"></div>
-          <div class="paragraph">Something long text should be cut</div>
-          <div class="date">11 Feb 2022</div>
-        </div>
-      </li>
-      <li>
-        <div class="message-box">
-          <div class="avatar"></div>
-          <div class="paragraph">Something long text should be cut</div>
-          <div class="date">11 Feb 2022</div>
-        </div>
-      </li>
-      <li>
-        <div class="message-box">
-          <div class="avatar"></div>
-          <div class="paragraph">Something long text should be cut</div>
-          <div class="date">11 Feb 2022</div>
-        </div>
-      </li>
-      <li>
-        <div class="message-box">
-          <div class="avatar"></div>
-          <div class="paragraph">Something long text should be cut</div>
-          <div class="date">11 Feb 2022</div>
-        </div>
-      </li>
-      <li>
-        <div class="message-box">
-          <div class="avatar"></div>
-          <div class="paragraph">Something long text should be cut</div>
-          <div class="date">11 Feb 2022</div>
-        </div>
-      </li>
-      <li>
-        <div class="message-box">
-          <div class="avatar"></div>
-          <div class="paragraph">Something long text should be cut</div>
-          <div class="date">11 Feb 2022</div>
-        </div>
-      </li>
-      <li>
-        <div class="message-box">
-          <div class="avatar"></div>
-          <div class="paragraph">Something long text should be cut</div>
-          <div class="date">11 Feb 2022</div>
-        </div>
-      </li>
-      <li>
-        <div class="message-box">
-          <div class="avatar"></div>
-          <div class="paragraph">Something long text should be cut Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae corporis culpa cum delectus dolore eligendi explicabo impedit ipsam magni, maiores nemo obcaecati optio praesentium quidem, quo saepe tempore velit veritatis!</div>
-          <div class="date">11 Feb 2022</div>
-        </div>
-      </li>
-      <li>
-        <div class="message-box">
-          <div class="avatar"></div>
-          <div class="paragraph">Something long text should be cut</div>
-          <div class="date">11 Feb 2022</div>
-        </div>
-      </li>
-      <li>
-        <div class="message-box">
-          <div class="avatar"></div>
-          <div class="paragraph">Something long text should be cut</div>
-          <div class="date">11 Feb 2022</div>
-        </div>
-      </li>
+
+<!--      <li>-->
+<!--        <div class="message-box">-->
+<!--          <div class="avatar"></div>-->
+<!--          <div class="paragraph">Something long text should be cut</div>-->
+<!--          <div class="date">11 Feb 2022</div>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="message-box">-->
+<!--          <div class="avatar"></div>-->
+<!--          <div class="paragraph">Something long text should be cut</div>-->
+<!--          <div class="date">11 Feb 2022</div>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="message-box">-->
+<!--          <div class="avatar"></div>-->
+<!--          <div class="paragraph">Something long text should be cut</div>-->
+<!--          <div class="date">11 Feb 2022</div>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="message-box">-->
+<!--          <div class="avatar"></div>-->
+<!--          <div class="paragraph">Something long text should be cut</div>-->
+<!--          <div class="date">11 Feb 2022</div>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="message-box">-->
+<!--          <div class="avatar"></div>-->
+<!--          <div class="paragraph">Something long text should be cut</div>-->
+<!--          <div class="date">11 Feb 2022</div>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="message-box">-->
+<!--          <div class="avatar"></div>-->
+<!--          <div class="paragraph">Something long text should be cut</div>-->
+<!--          <div class="date">11 Feb 2022</div>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="message-box">-->
+<!--          <div class="avatar"></div>-->
+<!--          <div class="paragraph">Something long text should be cut</div>-->
+<!--          <div class="date">11 Feb 2022</div>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="message-box">-->
+<!--          <div class="avatar"></div>-->
+<!--          <div class="paragraph">Something long text should be cut</div>-->
+<!--          <div class="date">11 Feb 2022</div>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="message-box">-->
+<!--          <div class="avatar"></div>-->
+<!--          <div class="paragraph">Something long text should be cut Lorem ipsum dolor sit amet, consectetur adipisicing-->
+<!--            elit. Beatae corporis culpa cum delectus dolore eligendi explicabo impedit ipsam magni, maiores nemo-->
+<!--            obcaecati optio praesentium quidem, quo saepe tempore velit veritatis!-->
+<!--          </div>-->
+<!--          <div class="date">11 Feb 2022</div>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="message-box">-->
+<!--          <div class="avatar"></div>-->
+<!--          <div class="paragraph">Something long text should be cut</div>-->
+<!--          <div class="date">11 Feb 2022</div>-->
+<!--        </div>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <div class="message-box">-->
+<!--          <div class="avatar"></div>-->
+<!--          <div class="paragraph">Something long text should be cut</div>-->
+<!--          <div class="date">11 Feb 2022</div>-->
+<!--        </div>-->
+<!--      </li>-->
     </ul>
   </div>
 </div>

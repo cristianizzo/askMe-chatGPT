@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {from, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
-import {EnvService} from '@services/config.services';
+import {EnvService} from '@services/config.service';
 import {EnvModel} from '@app/models';
 import {UtilsHelper} from '@helpers/utils';
 

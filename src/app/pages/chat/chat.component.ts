@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-page-chat',
@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./chat.component.scss']
 })
 export class PageChatComponent {
-  title = 'askMe';
 
+  constructor() {
+  }
 }

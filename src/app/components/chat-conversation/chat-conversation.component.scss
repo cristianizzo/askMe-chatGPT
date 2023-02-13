@@ -31,7 +31,7 @@
 
         .message-box {
           display: grid;
-          grid-template-columns: 38px 1fr;
+          grid-template-columns: 38px 50%;
 
           .avatar {
             width: 30px;
@@ -46,7 +46,7 @@
 
           .paragraph {
             background-color: #64758b;
-            width: 50%;
+            width: 100%;
             padding: 10px 10px;
             border-radius: 12px;
             color: #fff;

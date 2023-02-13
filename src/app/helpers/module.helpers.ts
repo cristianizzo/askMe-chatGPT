@@ -6,13 +6,11 @@ import {UtilsHelper} from '@helpers/utils';
   imports: [
     CommonModule,
   ],
-  declarations: [
-  ],
+  declarations: [],
   providers: [
     UtilsHelper,
   ],
-  exports: [
-  ]
+  exports: []
 })
 
 export class NgAskMeHelpersModule {

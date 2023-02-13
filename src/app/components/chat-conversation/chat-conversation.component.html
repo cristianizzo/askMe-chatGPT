@@ -5,55 +5,28 @@
 
   <div class="conversation">
     <ul>
-      <li class="me">
+      <li *ngFor="let conversation of conversations"
+          [class.bot]="conversation.from === conversationFrom.BOT"
+          [class.me]="conversation.from === conversationFrom.ME">
         <div class="message-box">
-          <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad aspernatur, consequuntur cum doloremque enim error eum</div>
-          <div class="avatar"></div>
-        </div>
-      </li>
-      <li class="bot">
-        <div class="message-box">
-          <div class="avatar"></div>
-          <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad aspernatur, consequuntur cum doloremque enim error eum eveniet explicabo iste libero nobis numquam pariatur perspiciatis quia repellendus saepe sunt ullam?</div>
-        </div>
-      </li>
-      <li class="me">
-        <div class="message-box">
-          <div class="paragraph">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad aspernatur, consequuntur cum doloremque enim error eum</div>
-          <div class="avatar"></div>
-        </div>
-      </li>
-      <li class="bot">
-        <div class="message-box">
-          <div class="avatar"></div>
-          <div class="paragraph">Something long text should be cut</div>
-        </div>
-      </li>
-      <li class="me">
-        <div class="message-box">
-          <div class="paragraph">Something long text should be cut</div>
-          <div class="avatar"></div>
-        </div>
-      </li>
-      <li class="bot">
-        <div class="message-box">
-          <div class="avatar"></div>
-          <div class="paragraph">Something long text should be cut</div>
-        </div>
-      </li>
-      <li class="me">
-        <div class="message-box">
-          <div class="paragraph">Something long text should be cut</div>
-          <div class="avatar"></div>
+          <ng-container *ngIf="conversation.from === conversationFrom.BOT">
+            <div class="avatar"></div>
+          </ng-container>
+          <div [innerHTML]="conversation.message" class="paragraph"></div>
+          <ng-container *ngIf="conversation.from === conversationFrom.ME">
+            <div class="avatar"></div>
+          </ng-container>
         </div>
       </li>
     </ul>
   </div>
 
   <div class="chat-input">
-    <textarea matInput placeholder="Ask me anything" rows="3"></textarea>
-    <button mat-fab>
-      <mat-icon>send</mat-icon>
-    </button>
+    <form (keydown.enter)="(!formObj.invalid) ? submit() : null" [formGroup]="formObj" autocomplete="off">
+      <textarea formControlName="message" matInput placeholder="Ask me anything" rows="3"></textarea>
+      <button (click)="submit()" mat-fab>
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
   </div>
 </div>

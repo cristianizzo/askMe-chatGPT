@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {JwtService} from "@services/jwt.services";
+import {StorageProxy} from '@proxies/storage.proxy';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +8,11 @@ import {JwtService} from "@services/jwt.services";
 })
 export class AppComponent implements OnInit {
   constructor(
-    private jwtService: JwtService
+    private storageProxy: StorageProxy
   ) {
   }
 
   ngOnInit() {
-    this.jwtService.init();
+    this.storageProxy.init();
   }
 }

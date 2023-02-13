@@ -1,6 +1,6 @@
-import {JwtService} from '@services/jwt.services';
+import {LocalStorageService} from '@services/localstorage.service';
 import {Injectable} from '@angular/core';
-import {CanActivate, Router, ActivatedRouteSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, Router} from '@angular/router';
 import {UtilsHelper} from "@helpers/utils";
 
 @Injectable()
@@ -8,25 +8,25 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    private jwtService: JwtService,
+    private localStorageService: LocalStorageService,
     private utilsHelper: UtilsHelper,
   ) {
   }
 
   canActivate(route: ActivatedRouteSnapshot) {
 
-    console.log(route.data)
-    console.log(route.routeConfig?.path === '')
+    const token = this.localStorageService.getItem('token');
 
-    if(route.data['auth']) {
-      const token = this.jwtService.get('token');
-
-      if(!this.utilsHelper.notNull(token)) {
-        this.router.navigate(['token']);
-        return false
+    if (route.routeConfig?.path === '' && token) {
+      this.router.navigate(['/chat']);
+      return false
+    } else {
+      if (route.data['auth']) {
+        if (!this.utilsHelper.notNull(token)) {
+          this.router.navigate(['']);
+          return false
+        }
       }
-
-      return true;
     }
 
     return true;

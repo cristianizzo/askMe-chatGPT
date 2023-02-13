@@ -1,5 +1,13 @@
-<div class="form-container">
-  <mat-form-field hintLabel="Max 10 characters">
-    <input matInput #input placeholder="ChatGPT Token">
-  </mat-form-field>
+<div class="content">
+
+  <h2>Welcome to AskMe ChatBot</h2>
+  <p>Friendly UX for accessing new AI models developed by OpenAI </p>
+  <div class="token-input">
+    <form (keydown.enter)="(!formObj.invalid) ? submit() : null" [formGroup]="formObj" autocomplete="off">
+      <input formControlName="token" matInput placeholder="Token API KEY"/>
+      <button (click)="submit()" mat-raised-button>
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+  </div>
 </div>
