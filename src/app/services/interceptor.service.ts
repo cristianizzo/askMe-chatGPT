@@ -1,8 +1,8 @@
 import {Inject, Injectable} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
+import {HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {from, throwError} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
-import {EnvService} from '@services/config.services';
+import {catchError} from 'rxjs/operators';
+import {EnvService} from '@services/config.service';
 import {EnvModel} from '@app/models';
 import {UtilsHelper} from '@helpers/utils';
 
@@ -26,10 +26,6 @@ export class Interceptor implements HttpInterceptor {
   async handle(req: HttpRequest<any>, next: HttpHandler) {
     const xhr = req.clone();
     return next.handle(xhr).pipe(
-      tap((event: HttpEvent<any>) => {
-        if (event instanceof HttpResponse) {
-        }
-      }),
       catchError(this.utilsHelper.handleError)
     ).toPromise();
   }

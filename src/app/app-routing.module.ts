@@ -6,20 +6,27 @@ import {AuthGuard} from "@app/app.auth.guard";
 
 export const routes: Routes = [
   {
-    path: '',
-    component: PageChatComponent,
-    canActivate: [AuthGuard],
-    data: {auth: true},
-  },
-  {
     path: 'token',
     component: PageTokenComponent,
     canActivate: [AuthGuard],
     data: {auth: false},
   },
   {
+    path: 'chat',
+    component: PageChatComponent,
+    canActivate: [AuthGuard],
+    data: {auth: true},
+  },
+  {
+    path: 'chat/:sessionId',
+    component: PageChatComponent,
+    canActivate: [AuthGuard],
+    data: {auth: true},
+  },
+  {
     path: '**',
-    redirectTo: '',
+    redirectTo: '/chat',
+    pathMatch: 'full'
   }
 ];
 

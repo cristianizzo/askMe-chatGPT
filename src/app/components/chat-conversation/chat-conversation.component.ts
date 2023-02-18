@@ -1,10 +1,87 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ConversationModel, ENUM_FROM} from "@app/models";
+import {UtilsHelper} from "@helpers/utils";
+import {ConversationProxy} from "@proxies/conversation.proxy";
+import moment from "@helpers/moment";
 
 @Component({
   selector: 'app-chat-conversation',
   templateUrl: './chat-conversation.component.html',
   styleUrls: ['./chat-conversation.component.scss']
 })
-export class ChatConversationComponent {
+export class ChatConversationComponent implements OnChanges {
 
+  @Input() sessionId: number;
+  public formObj: FormGroup;
+  public conversationFrom = ENUM_FROM;
+  public conversations: ConversationModel[];
+  public loading: boolean;
+  public today: any;
+  @ViewChild('scrollMe') private chatContainer: ElementRef;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private conversationProxies: ConversationProxy,
+    private utilsHelper: UtilsHelper,
+  ) {
+    this.loading = false;
+    this.sessionId = null!;
+    this.conversations = [];
+    this.today = moment().format();
+    this.formObj = this.formBuilder.group({
+      message: ['', Validators.compose([
+        Validators.required,
+      ])],
+    });
+  }
+
+  async ngOnChanges(changes: SimpleChanges) {
+    if (this.utilsHelper.notNull(changes['sessionId']?.currentValue)) {
+      this.sessionId = changes['sessionId'].currentValue;
+      await this.loadConversation();
+    }
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
+    } catch (_) {
+      // ignore
+    }
+  }
+
+  async loadConversation() {
+    this.conversations = await this.conversationProxies.getConversation(this.sessionId);
+    await this.utilsHelper.wait(100);
+    this.scrollToBottom();
+  }
+
+  async submit() {
+    const rawForm = this.formObj.getRawValue();
+    await this.conversationProxies.saveInStorage(this.sessionId, {
+      from: ENUM_FROM.ME,
+      message: rawForm.message,
+      timestamp: moment().valueOf()
+    });
+    this.formObj.reset();
+    this.loading = true;
+    await this.loadConversation();
+
+    this.conversationProxies.askQuestion(rawForm.message).subscribe({
+      next: async (message) => {
+        await this.conversationProxies.saveInStorage(this.sessionId, {
+          from: ENUM_FROM.BOT,
+          message: message,
+          timestamp: moment().valueOf()
+        });
+        await this.loadConversation();
+        this.loading = false;
+      },
+      error: (error) => {
+        this.loading = false;
+        console.log(error)
+      }
+    });
+  }
 }

@@ -1,11 +1,11 @@
-import {EnvService} from '@services/config.services';
+import {EnvService} from '@services/config.service';
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {EnvModel} from '@app/models';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {UtilsHelper} from "@helpers/utils";
-import {JwtService} from "@services/jwt.services";
+import {UtilsHelper} from '@helpers/utils';
+import {LocalStorageService} from '@services/localstorage.service';
 
 @Injectable()
 export class APIService {
@@ -14,18 +14,12 @@ export class APIService {
     @Inject(EnvService) private global: EnvModel,
     private utilsHelper: UtilsHelper,
     private http: HttpClient,
-    private jwtService: JwtService,
+    private localStorageService: LocalStorageService,
   ) {
 
     if (!this.global) {
       throwError('Missing Env Variables');
     }
-  }
-
-  private getOpts(): any {
-    return {
-      headers: new HttpHeaders().set('Authorization', `Bearer ${this.jwtService.get('token')}`)
-    };
   }
 
   public get(path: string): Observable<any> {
@@ -47,5 +41,11 @@ export class APIService {
     const opts = this.getOpts();
     return this.http.delete(`${this.global.uriOpenAI}${path}`, {...opts, body})
       .pipe(catchError(this.utilsHelper.handleError));
+  }
+
+  private getOpts(): any {
+    return {
+      headers: new HttpHeaders().set('Authorization', `Bearer ${this.localStorageService.getItem('askMeTT')}`)
+    };
   }
 }

@@ -11,8 +11,12 @@
   font-weight: 600;
 }
 
+.spacer {
+  flex: 1;
+}
+
 .logo {
-  margin-left: 18px;
+  margin-left: 35px;
   padding: 14px 0;
   border-radius: 4px;
   display: flex;
@@ -41,6 +45,12 @@
   }
 }
 
+.logo-img {
+  width: 55px;
+  left: -40px;
+  position: absolute;
+  top: -15px;
+}
 
 .toolbar img {
   margin: 0 16px;

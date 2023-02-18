@@ -1,7 +1,8 @@
 import Decimal from 'decimal.js';
 
-// @ts-ignore
-const configParser = (configSource: any = process.env, type, key, defaultValue) => {
+declare const process: any;
+
+const configParser = (configSource: any = process.env, type: string, key: string, defaultValue: any) => {
   const val = configSource[key];
 
   const def = (v: any) => defaultValue === undefined ? v : defaultValue;

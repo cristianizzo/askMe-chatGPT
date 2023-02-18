@@ -1,13 +1,22 @@
 {
   "name": "AskMe",
-  "short_name": "AskMe",
-  "start_url": "index.html",
-  "display": "standalone",
-  "icons": [{
-    "src": "assets/icons/icon-512x512.png",
-    "sizes": "512x512",
-    "type": "image/png"
-  }],
-  "background_color": "#000",
-  "theme_color": "#000"
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["main.js", "polyfills.js", "runtime.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "icons": {
+    "16": "assets/icons/icon-16x16.png",
+    "32": "assets/icons/icon-32x32.png",
+    "128": "assets/icons/icon-128x128.png",
+    "512": "assets/icons/icon-512x512.png"
+  }
 }
+
