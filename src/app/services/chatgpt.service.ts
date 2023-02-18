@@ -3,6 +3,9 @@ import {APIService} from "@services/api.service";
 import {environment} from "@env/environment";
 import {UtilsHelper} from "@helpers/utils";
 import {map, Observable} from "rxjs";
+import logger from '@app/app.logger';
+
+const logContent = logger.logContent('services:chatgpt');
 
 @Injectable()
 export class ChatGptService {
@@ -40,7 +43,11 @@ export class ChatGptService {
       return response.choices[0].logprobs.tokens.join(''); // array of string
       // return response.choices[0].text; plan text
     } else {
-      console.log('warn unhandled response', response);
+      logger.warn(
+        logContent.add({
+          info: 'warn unhandled response',
+        })
+      );
       return '';
     }
   }

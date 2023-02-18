@@ -4,6 +4,9 @@ import {ConversationModel, ENUM_FROM} from "@app/models";
 import {UtilsHelper} from "@helpers/utils";
 import {ConversationProxy} from "@proxies/conversation.proxy";
 import moment from "@helpers/moment";
+import logger from "@app/app.logger";
+
+const logContent = logger.logContent('app:chat-conversation');
 
 @Component({
   selector: 'app-chat-conversation',
@@ -80,7 +83,12 @@ export class ChatConversationComponent implements OnChanges {
       },
       error: (error) => {
         this.loading = false;
-        console.log(error)
+        logger.error(
+          logContent.add({
+            info: 'error askQuestion',
+            error,
+          })
+        );
       }
     });
   }
