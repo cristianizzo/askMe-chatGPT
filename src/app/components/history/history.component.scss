@@ -8,9 +8,25 @@
   border-right: 1px solid #d7d7d7;
   border-top: 1px solid #d7d7d7;
 
+  .input-header {
+    text-align: right;
+    padding: 7px;
+
+    .btn-new {
+      color: #000;
+      font-size: 12px;
+
+      mat-icon {
+        margin-left: 5px;
+        font-size: 20px;
+        line-height: 24px;
+      }
+    }
+  }
+
   .search-box {
     background-color: #f0f0f0;
-    padding: 30px 15px 15px 15px;
+    padding: 15px 15px 15px 15px;
 
     .input-search {
       position: relative;
@@ -30,24 +46,6 @@
         top: 9px;
       }
     }
-
-
-    //mat-form-field {
-    //  width: 100%;
-    //
-    //  ::ng-deep ::placeholder {
-    //    color: #94a3b8;
-    //    font-family: 'Inter', sans-serif;
-    //  }
-    //
-    //  ::ng-deep .mat-mdc-input-element {
-    //    color: #000;
-    //  }
-    //
-    //  ::ng-deep .mdc-text-field--filled {
-    //    background-color: #fff;
-    //  }
-    //}
   }
 
   .messages-box {
@@ -90,7 +88,8 @@
           overflow: hidden;
           block-size: 60px;
           font-size: 12px;
-          line-height: 17px;
+          line-height: 15px;
+          white-space: pre-wrap;
         }
 
         .date {

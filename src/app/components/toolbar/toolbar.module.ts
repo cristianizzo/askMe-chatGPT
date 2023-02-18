@@ -8,6 +8,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatButtonModule} from "@angular/material/button";
 import {MatMenuModule} from "@angular/material/menu";
+import {RouterLink} from "@angular/router";
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import {MatMenuModule} from "@angular/material/menu";
     MatTooltipModule,
     MatButtonModule,
     MatMenuModule,
+    RouterLink,
   ],
   declarations: [
     ToolbarComponent,

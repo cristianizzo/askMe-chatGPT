@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot) {
 
-    const token = this.localStorageService.getItem('token');
+    const token = this.localStorageService.getItem('askMeTT');
 
     if (route.routeConfig?.path === '' && token) {
       this.router.navigate(['/chat']);
@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     } else {
       if (route.data['auth']) {
         if (!this.utilsHelper.notNull(token)) {
-          this.router.navigate(['']);
+          this.router.navigate(['/token']);
           return false
         }
       }

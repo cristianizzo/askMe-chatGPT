@@ -6,6 +6,10 @@ import moment from "@helpers/moment";
 @Injectable()
 export class UtilsHelper {
 
+  public async wait(ms: number): Promise<any> {
+    return new Promise((res) => setTimeout(res, ms));
+  }
+
   public getRandomId(): number {
     return moment().valueOf();
   }
@@ -17,7 +21,7 @@ export class UtilsHelper {
 
   public notNull(value: any): boolean {
 
-    return (value && value !== undefined && value !== null);
+    return (value && value !== '');
   }
 
   public objectHasValue(value: any): boolean {

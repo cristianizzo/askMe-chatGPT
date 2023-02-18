@@ -1,17 +1,17 @@
 import {NgModule} from '@angular/core';
 import {CommonModule, DatePipe, DecimalPipe} from '@angular/common';
-import {KeyValuePipe} from '@pipes/keyvalue.pipe';
 import {DateFormatPipe} from '@pipes/dateFormat.pipe';
+import {FilterPipe} from '@pipes/filter.pipe';
 
 @NgModule({
   imports: [CommonModule],
   declarations: [
-    KeyValuePipe,
     DateFormatPipe,
+    FilterPipe,
   ],
   exports: [
-    KeyValuePipe,
     DateFormatPipe,
+    FilterPipe,
   ],
   providers: [DecimalPipe, DatePipe],
 })

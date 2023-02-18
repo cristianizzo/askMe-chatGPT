@@ -7,8 +7,7 @@ import moment from '@helpers/moment';
 })
 export class DateFormatPipe implements PipeTransform {
 
-  public transform(value: string, mini: boolean = false) {
-    console.log(value)
+  public transform(value: string, mini: boolean) {
     const newValueMm = moment(value).valueOf();
     let newValue: string | null = value;
 

@@ -37,7 +37,8 @@ export class ChatGptService {
       this.utilsHelper.arrayHasValue(response.choices) &&
       this.utilsHelper.stringHasValue(response.choices[0].text)
     ) {
-      return response.choices[0].text;
+      return response.choices[0].logprobs.tokens.join(''); // array of string
+      // return response.choices[0].text; plan text
     } else {
       console.log('warn unhandled response', response);
       return '';

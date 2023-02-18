@@ -6,7 +6,7 @@ import {AuthGuard} from "@app/app.auth.guard";
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'token',
     component: PageTokenComponent,
     canActivate: [AuthGuard],
     data: {auth: false},

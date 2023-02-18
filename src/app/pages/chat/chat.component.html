@@ -1,10 +1,10 @@
 <div class="chat">
   <div class='row'>
     <div class='column-left'>
-      <app-history></app-history>
+      <app-history (onSelectedSession)="openConversation($event)"></app-history>
     </div>
     <div class='column-center'>
-      <app-chat-conversation></app-chat-conversation>
+      <app-chat-conversation [sessionId]="sessionId"></app-chat-conversation>
     </div>
   </div>
 </div>

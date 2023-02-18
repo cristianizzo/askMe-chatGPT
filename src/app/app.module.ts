@@ -19,7 +19,8 @@ import {HistoryComponent} from '@components/history/history.component';
 import {ChatConversationComponent} from '@components/chat-conversation/chat-conversation.component';
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatButtonModule} from "@angular/material/button";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -44,6 +45,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatBadgeModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatProgressBarModule,
+    FormsModule,
   ],
   providers: [
     AuthGuard,

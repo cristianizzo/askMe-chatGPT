@@ -1,9 +1,11 @@
 <div class='chat-conversation'>
   <div class="chat-header">
-    Today 22 Feb 2023 - 12:45
+    <mat-icon>access_time</mat-icon>
+    {{today | date: 'HH:mm - dd MMM yyyy'}}
+    <mat-progress-bar *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-bar>
   </div>
 
-  <div class="conversation">
+  <div #scrollMe class="conversation">
     <ul>
       <li *ngFor="let conversation of conversations"
           [class.bot]="conversation.from === conversationFrom.BOT"
@@ -18,13 +20,22 @@
           </ng-container>
         </div>
       </li>
+
+      <li *ngIf="loading" class="loading bot">
+        <div class="message-box">
+          <div class="avatar"></div>
+          <div class="loading-paragraph">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
 
   <div class="chat-input">
     <form (keydown.enter)="(!formObj.invalid) ? submit() : null" [formGroup]="formObj" autocomplete="off">
       <textarea formControlName="message" matInput placeholder="Ask me anything" rows="3"></textarea>
-      <button (click)="submit()" mat-fab>
+      <button (click)="submit()" [disabled]="formObj.invalid" mat-fab>
         <mat-icon>send</mat-icon>
       </button>
     </form>

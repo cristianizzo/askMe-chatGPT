@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ConversationProxy} from "@proxies/conversation.proxy";
+import {UtilsHelper} from "@helpers/utils";
 
 @Component({
   selector: 'app-history',
@@ -8,10 +9,13 @@ import {ConversationProxy} from "@proxies/conversation.proxy";
 })
 export class HistoryComponent implements OnInit {
 
-  public conversations: any;
+  @Output() onSelectedSession = new EventEmitter<any>();
+  public conversations: { id: string; message: string; }[];
+  public searchQuery: string;
 
   constructor(
-    private conversationProxies: ConversationProxy
+    private conversationProxies: ConversationProxy,
+    private utilsHelper: UtilsHelper,
   ) {
   }
 
@@ -21,12 +25,29 @@ export class HistoryComponent implements OnInit {
 
   async loadConversation() {
     const conversations = await this.conversationProxies.getHistory();
-    console.log(conversations)
-    this.conversations = conversations;
-    // this.conversations = conversations || [];
+
+    if (!this.utilsHelper.objectHasValue(conversations)) {
+      this.conversations = [];
+    }
+
+    this.conversations = Object.keys(conversations).reduce((acc: any, key: any) => {
+
+      acc.push({
+        id: key,
+        from: conversations[key][0].from,
+        message: conversations[key][0].message,
+        timestamp: conversations[key][0].timestamp
+      });
+
+      return acc;
+    }, []).sort((a: any, b: any) => b.id - a.id);
+  }
+
+  selectConversation(conversationId?: any) {
+    this.onSelectedSession.emit(conversationId);
   }
 
   parseLastMessage(value: any) {
-    return value[value.length -1];
+    return value[value.length - 1];
   }
 }

@@ -19,28 +19,15 @@ export class StorageProxy {
     await this._initStorage();
   }
 
-  public async save(key: string, data: any): Promise<string> {
-    if (environment.isExtension) {
-
-    }
-
+  public async save(key: string, data: any): Promise<any> {
     return this.localForage.setItem(key, data);
   }
 
   public async get(key: string): Promise<any> {
-
-    if (environment.isExtension) {
-
-    }
-
     return this.localForage.getItem(key);
   }
 
   public async destroy(key: string): Promise<any> {
-    if (environment.isExtension) {
-
-    }
-
     return this.localForage.removeItem(key);
   }
 
