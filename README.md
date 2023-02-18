@@ -16,7 +16,7 @@ You can try the extension using hosted at:
 
 ``` yarn build:extension ```
 
-Now you need to load the locally built chrome extension into your browser, by loading an unpacked extension from path `packages/extension/dist`:
+Now you need to load the locally built chrome extension into your browser, by loading an unpacked extension from path `dist/ask-me`:
 
 ### Chrome
 
