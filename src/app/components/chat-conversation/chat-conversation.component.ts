@@ -29,7 +29,6 @@ export class ChatConversationComponent implements OnChanges {
     private utilsHelper: UtilsHelper,
   ) {
     this.loading = false;
-    this.sessionId = null!;
     this.conversations = [];
     this.today = moment().format();
     this.formObj = this.formBuilder.group({
@@ -61,6 +60,10 @@ export class ChatConversationComponent implements OnChanges {
   }
 
   async submit() {
+    if (!this.sessionId) {
+      this.sessionId = this.utilsHelper.getRandomId();
+    }
+
     const rawForm = this.formObj.getRawValue();
     await this.conversationProxies.saveInStorage(this.sessionId, {
       from: ENUM_FROM.ME,

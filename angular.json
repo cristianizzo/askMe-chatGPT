@@ -35,17 +35,19 @@
               "moment",
               "sweetalert2",
               "lodash",
-              "localforage"
+              "localforage",
+              "pino"
             ],
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/manifest.json"
+              "src/background.js"
             ],
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {
@@ -111,7 +113,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/background.js"
             ],
             "styles": [
               "src/styles.scss"

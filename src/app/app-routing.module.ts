@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {PageTokenComponent} from "@pages/token/token.component";
 import {PageChatComponent} from "@pages/chat/chat.component";
 import {AuthGuard} from "@app/app.auth.guard";
@@ -32,10 +32,9 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules}),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-
 export class AppRoutingModule {
 }

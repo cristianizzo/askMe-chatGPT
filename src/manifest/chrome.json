@@ -2,16 +2,23 @@
   "name": "AskMe",
   "version": "0.0.1",
   "manifest_version": 3,
+  "permissions": [
+    "background",
+    "commands",
+    "contextMenus"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "chrome_url_overrides": {
     "newtab": "index.html"
   },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["main.js", "polyfills.js", "runtime.js"],
-      "css": ["styles.css"]
+  "commands": {
+    "open-askme": {
+      "suggested_key": "Ctrl+Shift+O",
+      "description": "Quick Open"
     }
-  ],
+  },
   "icons": {
     "16": "assets/icons/icon-16x16.png",
     "32": "assets/icons/icon-32x32.png",
