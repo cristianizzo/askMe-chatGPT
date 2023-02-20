@@ -12,7 +12,7 @@ export class ChatGptService {
 
   private opts = {
     best_of: 1,
-    echo: true,
+    echo: false,
     frequency_penalty: 0,
     logprobs: 0,
     max_tokens: 256,
