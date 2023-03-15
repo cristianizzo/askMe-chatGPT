@@ -6,10 +6,10 @@ import {PayloadMessageModel} from "@app/models";
 import {map, Observable} from "rxjs";
 import logger from '@app/app.logger';
 
-const logContent = logger.logContent('services:chatgpt');
+const logContent = logger.logContent('services:openai');
 
 @Injectable()
-export class ChatGptService {
+export class OpenAIService {
 
   private opts = {
     model: environment.modelOpenAI
@@ -21,12 +21,12 @@ export class ChatGptService {
   ) {
   }
 
-  public postMessage(prompt: string): Observable<string> {
+  public createCompletions(prompt: string): Observable<string> {
     return this.apiService.post('/v1/completions', this.payloadCompletions(prompt))
       .pipe(map(data => this.parseMessage(data)));
   }
 
-  public postChatMessage(messages: PayloadMessageModel[]): Observable<string> {
+  public createChatCompletions(messages: PayloadMessageModel[]): Observable<string> {
     return this.apiService.post('/v1/chat/completions', this.payloadChat(messages))
       .pipe(map(data => this.parseMessage(data)));
   }
