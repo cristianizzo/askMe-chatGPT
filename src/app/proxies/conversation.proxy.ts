@@ -19,10 +19,11 @@ export class ConversationProxy {
     const messages = [];
 
     // Add the two last messages from the conversations list, if available.
-    for (let i = conversations.length - 1; i >= conversations.length - 2 && i >= 0; i--) {
-      const preMessage = conversations[i];
-      const role = preMessage.from === ENUM_FROM.ME ? 'user' : 'assistant';
-      messages.push({role, content: preMessage.message});
+    const messageLng = 5;
+    for (let i = Math.max(conversations.length - messageLng, 0); i < conversations.length; i++) {
+      const history = conversations[i];
+      const role = history.from === ENUM_FROM.ME ? 'user' : 'assistant';
+      messages.push({role, content: history.message});
     }
 
     // Add the current user's message.
