@@ -1,7 +1,8 @@
 ## AskMe Anything ChatBot
 
-You can try the extension using hosted at:
+![Screenshot 2023-03-15 at 05.31.02.png](screens/screen.png)
 
+Repository:
 [https://github.com/cristianizzo/askMe-chatGPT/](https://github.com/cristianizzo/askMe-chatGPT/)
 
 ## Setup dependencies
@@ -33,3 +34,4 @@ Everyone is welcome to contribute.
 CryptoCrash, 2022
 
 Cheers ;)
+
