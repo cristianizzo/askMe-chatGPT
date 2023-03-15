@@ -39,7 +39,7 @@ export class ConversationProxy {
     return conversations[sessionId];
   }
 
-  public async saveInStorage(sessionId: number, conversation: ConversationModel): Promise<any> {
+  public async saveConversation(sessionId: number, conversation: ConversationModel): Promise<any> {
     const conversations = await this.storageProxy.get('conversations');
 
     if (!conversations[sessionId]) {
@@ -48,6 +48,17 @@ export class ConversationProxy {
 
     conversations[sessionId].push(conversation);
     await this.storageProxy.save('conversations', conversations);
+
+    return true;
+  }
+
+  public async deleteConversation(sessionId: number): Promise<any> {
+    const conversations = await this.storageProxy.get('conversations');
+
+    if (conversations[sessionId]) {
+      delete conversations[sessionId];
+      await this.storageProxy.save('conversations', conversations);
+    }
 
     return true;
   }

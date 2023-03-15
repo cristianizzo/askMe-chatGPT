@@ -11,8 +11,9 @@
 
   <div class="messages-box">
     <ul>
-      <li *ngFor="let item of conversations | appFilter: searchQuery:['timestamp']">
+      <li *ngFor="let item of conversations | appFilter: searchQuery:['timestamp'];" [class.active]="selectedSessionId === item.id">
         <div (click)="selectConversation(item.id)" class="message-box">
+          <button class="btn-delete" (click)="deleteConversation(item.id)"><mat-icon>delete</mat-icon></button>
           <div class="avatar"></div>
           <div class="paragraph">{{item.message}}</div>
           <div class="date">

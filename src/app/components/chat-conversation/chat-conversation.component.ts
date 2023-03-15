@@ -65,7 +65,7 @@ export class ChatConversationComponent implements OnChanges {
     }
 
     const rawForm = this.formObj.getRawValue();
-    await this.conversationProxies.saveInStorage(this.sessionId, {
+    await this.conversationProxies.saveConversation(this.sessionId, {
       from: ENUM_FROM.ME,
       message: rawForm.message,
       timestamp: moment().valueOf()
@@ -76,7 +76,7 @@ export class ChatConversationComponent implements OnChanges {
 
     this.conversationProxies.askQuestion(rawForm.message).subscribe({
       next: async (message) => {
-        await this.conversationProxies.saveInStorage(this.sessionId, {
+        await this.conversationProxies.saveConversation(this.sessionId, {
           from: ENUM_FROM.BOT,
           message: message,
           timestamp: moment().valueOf()
