@@ -23,7 +23,6 @@ export class PageChatComponent implements OnInit {
     this.sessionId = this.route.snapshot.params['sessionId'] || this.utilsHelper.getRandomId();
   }
 
-
   openConversation(sessionId?: any) {
     this.sessionId = sessionId;
     if (sessionId) {

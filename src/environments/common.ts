@@ -8,9 +8,9 @@ const getConfigObject = (sourceConfig: string) => ({
   production: configParser(sourceConfig, 'bool', 'NG_APP_PROD_BUILD', false),
   version: configParser(sourceConfig, 'string', 'NG_APP_VERSION', '1.0.0'),
   sentry: configParser(sourceConfig, 'string', 'NG_APP_SENTRY_DSN', null),
-  uriOpenAI: configParser(sourceConfig, 'string', 'NG_APP_URI_OPENAI', 'https://api.openai.com/v1/completions'),
+  uriOpenAI: configParser(sourceConfig, 'string', 'NG_APP_URI_OPENAI', 'https://api.openai.com'),
   apiKeyOpenAI: configParser(sourceConfig, 'string', 'NG_APP_API_KEY_OPENAI', null),
-  modelOpenAI: configParser(sourceConfig, 'string', 'NG_APP_MODEL_OPENAI', 'text-davinci-003'),
+  modelOpenAI: configParser(sourceConfig, 'string', 'NG_APP_MODEL_OPENAI', 'gpt-3.5-turbo'),
 });
 
 export default {getConfigObject};

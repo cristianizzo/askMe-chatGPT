@@ -43,7 +43,7 @@ export class PageTokenComponent implements OnInit {
     const rawForm = this.formObj.getRawValue();
     this.localStorageService.setItem('askMeTT', rawForm.token);
 
-    this.conversationProxy.ask('Which day is today').subscribe({
+    this.conversationProxy.askQuestion('Which day is today').subscribe({
       next: async () => {
         await this.router.navigate(['/chat']);
       },

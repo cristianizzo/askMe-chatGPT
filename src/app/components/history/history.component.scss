@@ -58,17 +58,36 @@
     }
 
     li {
+      &.active,
       :hover {
         background-color: rgba(238, 242, 255);
       }
 
       div.message-box {
+        position: relative;
         cursor: pointer;
         border-top: 1px solid #d7d7d7;
         padding: 15px 14px;
         display: grid;
         grid-template-columns: 44px 2fr 80px;
         grid-template-rows: repeat(auto-fill, 100%);
+
+        .btn-delete {
+          position: absolute;
+          right: 8px;
+          background: transparent;
+          border: 0;
+          padding: 0;
+          margin: 0;
+          bottom: 7px;
+          color: #e50000;
+          cursor: pointer;
+          z-index: 2;
+
+          mat-icon {
+            font-size: 14px;
+          }
+        }
 
         .avatar {
           background-image: url(/assets/images/chatbot-blue.svg);
