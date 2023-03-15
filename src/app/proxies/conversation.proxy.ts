@@ -3,7 +3,7 @@ import {UtilsHelper} from "@helpers/utils";
 import {map, Observable} from "rxjs";
 import {ConversationModel, ENUM_FROM, PayloadMessageModel} from "@app/models";
 import {StorageProxy} from "@proxies/storage.proxy";
-import {ChatGptService} from "@services/chatgpt.service";
+import {OpenAIService} from "@services/openai.service";
 
 @Injectable()
 export class ConversationProxy {
@@ -11,7 +11,7 @@ export class ConversationProxy {
   constructor(
     private utilsHelper: UtilsHelper,
     private storageProxy: StorageProxy,
-    private chatGptService: ChatGptService,
+    private openAIService: OpenAIService,
   ) {
   }
 
@@ -32,13 +32,13 @@ export class ConversationProxy {
     return messages;
   }
 
-  public askQuestion(prompt: string): Observable<string> {
-    return this.chatGptService.postMessage(prompt)
+  public createCompletions(prompt: string): Observable<string> {
+    return this.openAIService.createCompletions(prompt)
       .pipe(map((message) => message));
   }
 
-  public askChatQuestion(messages: PayloadMessageModel[]): Observable<string> {
-    return this.chatGptService.postChatMessage(messages)
+  public createChatCompletions(messages: PayloadMessageModel[]): Observable<string> {
+    return this.openAIService.createChatCompletions(messages)
       .pipe(map((message) => message));
   }
 

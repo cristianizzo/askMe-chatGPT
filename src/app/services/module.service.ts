@@ -4,12 +4,12 @@ import {EnvModel} from '@app/models';
 import {EnvService} from '@services/config.service';
 import {APIService} from '@services/api.service';
 import {Interceptor} from '@services/interceptor.service';
-import {ChatGptService} from '@services/chatgpt.service';
+import {OpenAIService} from '@services/openai.service';
 import {LocalForageService} from '@services/localforage.service';
 import {LocalStorageService} from '@services/localstorage.service';
 import {DEFAULT_CONFIG, Driver, NgForageOptions} from 'ngforage';
 
-export {ChatGptService, LocalForageService, LocalStorageService};
+export {OpenAIService, LocalForageService, LocalStorageService};
 
 @NgModule({
   imports: [
@@ -29,7 +29,7 @@ export class NgAskMeServicesModule {
     return {
       ngModule: NgAskMeServicesModule,
       providers: [
-        ChatGptService,
+        OpenAIService,
         LocalForageService,
         LocalStorageService,
         APIService,

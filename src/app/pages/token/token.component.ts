@@ -4,6 +4,7 @@ import {ConversationProxy} from "@proxies/conversation.proxy";
 import {Router} from "@angular/router";
 import {LocalStorageService} from "@services/localstorage.service";
 import {SweetAlertHelper} from '@helpers/sweetalert2';
+import {environment} from "@env/environment";
 
 @Component({
   selector: 'app-page-token',
@@ -14,6 +15,7 @@ export class PageTokenComponent implements OnInit {
 
   public formObj: FormGroup;
   public token: string;
+  public model = environment.modelOpenAI;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,7 +45,7 @@ export class PageTokenComponent implements OnInit {
     const rawForm = this.formObj.getRawValue();
     this.localStorageService.setItem('askMeTT', rawForm.token);
 
-    this.conversationProxy.askQuestion('Which day is today').subscribe({
+    this.conversationProxy.createCompletions('Which day is today').subscribe({
       next: async () => {
         await this.router.navigate(['/chat']);
       },

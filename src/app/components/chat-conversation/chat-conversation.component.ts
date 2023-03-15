@@ -75,7 +75,7 @@ export class ChatConversationComponent implements OnChanges {
     await this.loadConversation();
 
     const messages = this.conversationProxies.parseChatPayload(this.conversations, rawForm.message);
-    this.conversationProxies.askChatQuestion(messages).subscribe({
+    this.conversationProxies.createChatCompletions(messages).subscribe({
       next: async (message) => {
         await this.conversationProxies.saveConversation(this.sessionId, {
           from: ENUM_FROM.BOT,
