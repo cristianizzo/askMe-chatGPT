@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {UtilsHelper} from "@helpers/utils";
 import {map, Observable} from "rxjs";
-import {ConversationModel} from "@app/models";
+import {ConversationModel, ENUM_FROM, PayloadMessageModel} from "@app/models";
 import {StorageProxy} from "@proxies/storage.proxy";
 import {ChatGptService} from "@services/chatgpt.service";
 
@@ -15,13 +15,29 @@ export class ConversationProxy {
   ) {
   }
 
-  public ask(message: string): Observable<string> {
-    return this.chatGptService.postMessage(message)
-      .pipe(map(message => message));
+  public parseChatPayload(conversations: ConversationModel[], message: string): PayloadMessageModel[] {
+    const messages = [];
+
+    // Add the two last messages from the conversations list, if available.
+    for (let i = conversations.length - 1; i >= conversations.length - 2 && i >= 0; i--) {
+      const preMessage = conversations[i];
+      const role = preMessage.from === ENUM_FROM.ME ? 'user' : 'assistant';
+      messages.push({role, content: preMessage.message});
+    }
+
+    // Add the current user's message.
+    messages.push({role: 'user', content: message});
+
+    return messages;
   }
 
   public askQuestion(prompt: string): Observable<string> {
     return this.chatGptService.postMessage(prompt)
+      .pipe(map((message) => message));
+  }
+
+  public askChatQuestion(messages: PayloadMessageModel[]): Observable<string> {
+    return this.chatGptService.postChatMessage(messages)
       .pipe(map((message) => message));
   }
 
