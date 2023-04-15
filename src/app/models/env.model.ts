@@ -6,7 +6,9 @@ export interface EnvModel {
   isExtension: boolean;
   production: boolean;
   version?: string;
-  uriOpenAI?: string;
-  apiKeyOpenAI?: string;
-  modelOpenAI?: string;
+  openai: {
+    uri: string;
+    chatModel: string;
+    textModel: string;
+  }
 }

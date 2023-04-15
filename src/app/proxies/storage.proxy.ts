@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {environment} from "@env/environment";
 import {LocalForageService} from "@services/localforage.service";
 
 @Injectable()
@@ -11,11 +10,6 @@ export class StorageProxy {
   }
 
   public async init() {
-    const token = this.get('token');
-    if (!token && environment.apiKeyOpenAI) {
-      await this.save('token', environment.apiKeyOpenAI);
-    }
-
     await this._initStorage();
   }
 

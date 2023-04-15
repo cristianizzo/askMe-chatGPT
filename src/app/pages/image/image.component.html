@@ -1,0 +1,46 @@
+<div class="content">
+
+  <h2>Image Generator</h2>
+
+  <div class="image">
+    <form (keydown.enter)="(!formObj.invalid) ? submit() : null" [formGroup]="formObj" autocomplete="off">
+
+      <mat-grid-list cols="4" rowHeight="100px">
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <mat-form-field appearance="fill">
+            <mat-label>Size</mat-label>
+            <mat-select formControlName="size">
+              <mat-option *ngFor="let size of sizeList" [value]="size">
+                {{size}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="1">
+          <mat-form-field appearance="fill">
+            <mat-label>Qty</mat-label>
+            <mat-select formControlName="qty">
+              <mat-option *ngFor="let qty of qtyList" [value]="qty">
+                {{qty}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+
+      <input formControlName="prompt" matInput placeholder="attributes" type="text">
+
+      <button (click)="submit()" [class.disabled]="formObj.invalid || formObj.untouched"
+              [disabled]="formObj.invalid || formObj.untouched" mat-fab>
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+  </div>
+
+  <div class="list-images qpass-flex">
+    <div *ngFor="let image of imageList" class="col-xs-6">
+      <img [src]="image.url" alt=""/>
+    </div>
+  </div>
+</div>
