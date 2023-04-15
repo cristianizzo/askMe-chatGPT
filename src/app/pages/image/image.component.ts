@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {OpenAIService} from "@services/openai.service";
+import {SweetAlertHelper} from "@helpers/sweetalert2";
+import {LocalStorageService} from "@services/localstorage.service";
 
 @Component({
   selector: 'app-page-image',
@@ -17,6 +19,8 @@ export class PageImageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private openAI: OpenAIService,
+    private alertHelper: SweetAlertHelper,
+    private localStorageService: LocalStorageService,
   ) {
     this.qtyList = [1, 2, 3, 4];
     this.sizeList = ['256x256', '512x512', '1024x1024'];
@@ -47,10 +51,14 @@ export class PageImageComponent implements OnInit {
     this.openAI.createImages(rawForm.prompt, rawForm.qty, rawForm.size).subscribe({
       next: async (data) => {
         this.imageList = data;
-        console.log(data)
       },
       error: async (error) => {
-        console.log(error)
+        this.localStorageService.removeItem('askMeTT');
+        await this.alertHelper.sweetalert.fire({
+          title: 'Error',
+          text: error?.message,
+          icon: 'error',
+        });
       }
     });
   }

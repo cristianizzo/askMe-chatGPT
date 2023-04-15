@@ -49,7 +49,7 @@ export class PageTokenComponent implements OnInit {
       },
       error: async () => {
         this.localStorageService.removeItem('askMeTT');
-        this.alertHelper.sweetalert.fire({
+        await this.alertHelper.sweetalert.fire({
           title: 'Error',
           text: 'Token is not valid!',
           icon: 'error',
