@@ -23,23 +23,23 @@ export class APIService {
   }
 
   public get(path: string): Observable<any> {
-    return this.http.get(`${this.global.uriOpenAI}${path}`, this.getOpts())
+    return this.http.get(`${this.global.openai.uri}${path}`, this.getOpts())
       .pipe(catchError(this.utilsHelper.handleError));
   }
 
   public put(path: string, body: object = {}): Observable<any> {
-    return this.http.put(`${this.global.uriOpenAI}${path}`, body, this.getOpts())
+    return this.http.put(`${this.global.openai.uri}${path}`, body, this.getOpts())
       .pipe(catchError(this.utilsHelper.handleError));
   }
 
   public post(path: string, body: object = {}): Observable<any> {
-    return this.http.post(`${this.global.uriOpenAI}${path}`, body, this.getOpts())
+    return this.http.post(`${this.global.openai.uri}${path}`, body, this.getOpts())
       .pipe(catchError(this.utilsHelper.handleError));
   }
 
   public delete(path: string, body: object = {}): Observable<any> {
     const opts = this.getOpts();
-    return this.http.delete(`${this.global.uriOpenAI}${path}`, {...opts, body})
+    return this.http.delete(`${this.global.openai.uri}${path}`, {...opts, body})
       .pipe(catchError(this.utilsHelper.handleError));
   }
 

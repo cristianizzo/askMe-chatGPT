@@ -20,8 +20,8 @@ export class HistoryComponent implements OnInit {
     private utilsHelper: UtilsHelper,
     private router: Router,
   ) {
-    router.events.subscribe(data=>{
-      if(data instanceof ActivationEnd){
+    router.events.subscribe(data => {
+      if (data instanceof ActivationEnd) {
         this.selectedSessionId = data.snapshot.params['sessionId'];
       }
     });

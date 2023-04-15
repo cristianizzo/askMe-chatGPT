@@ -11,9 +11,7 @@ const logContent = logger.logContent('services:openai');
 @Injectable()
 export class OpenAIService {
 
-  private opts = {
-    model: environment.modelOpenAI
-  }
+  private opts = {};
 
   constructor(
     private utilsHelper: UtilsHelper,
@@ -21,8 +19,8 @@ export class OpenAIService {
   ) {
   }
 
-  public createCompletions(prompt: string): Observable<string> {
-    return this.apiService.post('/v1/completions', this.payloadCompletions(prompt))
+  public createTextCompletions(prompt: string): Observable<string> {
+    return this.apiService.post('/v1/completions', this.payloadTextCompletions(prompt))
       .pipe(map(data => this.parseMessage(data)));
   }
 
@@ -31,7 +29,17 @@ export class OpenAIService {
       .pipe(map(data => this.parseMessage(data)));
   }
 
-  private parseMessage(response: any): string {
+  public createImages(prompt: string, n = 1, size = '1024x1024'): Observable<{ url: string }[]> {
+    return this.apiService.post('/v1/images/generations', {
+      prompt,
+      n,
+      size,
+      response_format: 'url'
+    })
+      .pipe(map(data => this.parseMessage(data)));
+  }
+
+  private parseMessage(response: any): any {
     if (
       this.utilsHelper.arrayHasValue(response.choices) &&
       this.utilsHelper.stringHasValue(response.choices[0].text)
@@ -44,6 +52,8 @@ export class OpenAIService {
       this.utilsHelper.stringHasValue(response.choices[0].message.content)
     ) {
       return response.choices[0].message.content;
+    } else if (response.data) {
+      return response.data;
     } else {
       logger.warn(
         logContent.add({
@@ -54,7 +64,7 @@ export class OpenAIService {
     }
   }
 
-  private payloadCompletions(prompt: string) {
+  private payloadTextCompletions(prompt: string) {
     return Object.assign(this.opts, {
       best_of: 1,
       echo: false,
@@ -66,6 +76,7 @@ export class OpenAIService {
       stream: false,
       temperature: 0.95,
       top_p: 1,
+      model: environment.openai.textModel
     }, {prompt})
   }
 
@@ -78,6 +89,8 @@ export class OpenAIService {
       max_tokens: 200,
       stream: false,
       n: 1,
+      model: environment.openai.chatModel
     }, {messages})
   }
+
 }

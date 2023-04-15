@@ -4,7 +4,6 @@ import {ConversationProxy} from "@proxies/conversation.proxy";
 import {Router} from "@angular/router";
 import {LocalStorageService} from "@services/localstorage.service";
 import {SweetAlertHelper} from '@helpers/sweetalert2';
-import {environment} from "@env/environment";
 
 @Component({
   selector: 'app-page-token',
@@ -15,7 +14,6 @@ export class PageTokenComponent implements OnInit {
 
   public formObj: FormGroup;
   public token: string;
-  public model = environment.modelOpenAI;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,7 +34,7 @@ export class PageTokenComponent implements OnInit {
     this.token = await this.localStorageService.getItem('askMeTT');
     if (this.token) {
       this.formObj.controls['token'].patchValue(this.token);
-      this.formObj.controls['token'].markAsTouched();
+      this.formObj.controls['token'].markAsUntouched();
       this.formObj.updateValueAndValidity();
     }
   }
@@ -45,13 +43,13 @@ export class PageTokenComponent implements OnInit {
     const rawForm = this.formObj.getRawValue();
     this.localStorageService.setItem('askMeTT', rawForm.token);
 
-    this.conversationProxy.createCompletions('Which day is today').subscribe({
+    this.conversationProxy.createTextCompletions('Which day is today').subscribe({
       next: async () => {
         await this.router.navigate(['/chat']);
       },
       error: async () => {
         this.localStorageService.removeItem('askMeTT');
-        this.alertHelper.sweetalert.fire({
+        await this.alertHelper.sweetalert.fire({
           title: 'Error',
           text: 'Token is not valid!',
           icon: 'error',

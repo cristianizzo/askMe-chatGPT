@@ -10,6 +10,7 @@ import {NgAskMeServicesModule} from '@services/module.service';
 import {NgAskMeProxiesModule} from '@proxies/module.proxy';
 import {PageTokenComponent} from '@pages/token/token.component';
 import {PageChatComponent} from '@pages/chat/chat.component';
+import {PageImageComponent} from '@pages/image/image.component';
 import {AuthGuard} from '@app/app.auth.guard';
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
@@ -21,12 +22,15 @@ import {MatBadgeModule} from "@angular/material/badge";
 import {MatButtonModule} from "@angular/material/button";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatSelectModule} from "@angular/material/select";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
     AppComponent,
     PageTokenComponent,
     PageChatComponent,
+    PageImageComponent,
     HistoryComponent,
     ChatConversationComponent,
   ],
@@ -47,6 +51,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     ReactiveFormsModule,
     MatProgressBarModule,
     FormsModule,
+    MatSelectModule,
+    MatGridListModule,
   ],
   providers: [
     AuthGuard,

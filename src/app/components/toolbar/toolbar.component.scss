@@ -52,6 +52,18 @@
   top: -15px;
 }
 
+.toolbar a {
+  position: relative;
+  margin: 0 16px;
+  .beta {
+    position: absolute;
+    font-size: 9px;
+    top: -9px;
+    right: -16px;
+    color: #000;
+  }
+}
+
 .toolbar img {
   margin: 0 16px;
 }

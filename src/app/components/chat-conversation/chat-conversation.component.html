@@ -35,7 +35,8 @@
   <div class="chat-input">
     <form (keydown.enter)="(!formObj.invalid) ? submit() : null" [formGroup]="formObj" autocomplete="off">
       <textarea formControlName="message" matInput placeholder="Ask me anything" rows="3"></textarea>
-      <button (click)="submit()" [disabled]="formObj.invalid" mat-fab>
+      <button (click)="submit()" [class.disabled]="formObj.invalid || formObj.untouched"
+              [disabled]="formObj.invalid || formObj.untouched" mat-fab>
         <mat-icon>send</mat-icon>
       </button>
     </form>

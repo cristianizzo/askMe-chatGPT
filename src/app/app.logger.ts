@@ -1,4 +1,4 @@
-import { environment } from '@env/environment';
+import {environment} from '@env/environment';
 import * as Sentry from '@sentry/angular';
 import logger from 'pino';
 
@@ -10,7 +10,7 @@ class LogData {
   }
 
   add(data: any) {
-    return { data, service: this.service };
+    return {data, service: this.service};
   }
 }
 

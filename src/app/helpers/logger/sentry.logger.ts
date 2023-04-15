@@ -1,6 +1,6 @@
-import { environment } from '@env/environment';
+import {environment} from '@env/environment';
 import * as Sentry from '@sentry/angular';
-import { Integrations } from '@sentry/tracing';
+import {Integrations} from '@sentry/tracing';
 
 const sentryKey = environment.sentry;
 

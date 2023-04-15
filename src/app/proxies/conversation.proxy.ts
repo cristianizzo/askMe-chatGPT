@@ -32,8 +32,8 @@ export class ConversationProxy {
     return messages;
   }
 
-  public createCompletions(prompt: string): Observable<string> {
-    return this.openAIService.createCompletions(prompt)
+  public createTextCompletions(prompt: string): Observable<string> {
+    return this.openAIService.createTextCompletions(prompt)
       .pipe(map((message) => message));
   }
 

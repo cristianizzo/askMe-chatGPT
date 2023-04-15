@@ -44,7 +44,8 @@
               "src/background.js"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/scss/qpass.scss"
             ],
             "scripts": [
             ]
@@ -117,7 +118,8 @@
               "src/background.js"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/scss/qpass.scss"
             ],
             "scripts": []
           }

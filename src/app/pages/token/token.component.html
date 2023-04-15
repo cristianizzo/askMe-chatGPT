@@ -2,7 +2,7 @@
 
   <h2>Welcome to AskMe ChatBot</h2>
   <p>
-    Friendly UX for accessing new AI model <strong [innerHTML]="model"></strong> developed by OpenAI<br/>
+    Friendly UX for accessing new AI model developed by OpenAI<br/>
     Generate your API KEY secret to get started
     <a href="https://platform.openai.com/account/api-keys" target="_blank"><strong>Get Secret</strong></a>
   </p>
@@ -10,7 +10,8 @@
   <div class="token-input">
     <form (keydown.enter)="(!formObj.invalid) ? submit() : null" [formGroup]="formObj" autocomplete="off">
       <input formControlName="token" matInput placeholder="Secret API KEY" type="password"/>
-      <button (click)="submit()" [disabled]="formObj.invalid" mat-raised-button>
+      <button (click)="submit()" [class.disabled]="formObj.invalid || formObj.untouched"
+              [disabled]="formObj.invalid || formObj.untouched" mat-raised-button>
         <mat-icon>send</mat-icon>
       </button>
     </form>
